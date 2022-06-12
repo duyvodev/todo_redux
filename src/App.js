@@ -4,12 +4,13 @@ import TodoList from "./components/TodoList";
 import Filters from "./components/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodoAction } from "./redux/actions/actions";
+import { todoListSelector } from "./redux/selectors";
 
 const { Title } = Typography;
 
 function App() {
   const dispatch = useDispatch();
-  const todoList = useSelector((state) => state.todo.todoList);
+  const todoList = useSelector(todoListSelector);
   console.log(todoList);
   const onAddTodo = (name, priority) => {
     dispatch(
