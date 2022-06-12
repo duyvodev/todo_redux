@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 const { Search } = Input;
 
 export default function Filters(props) {
-  const { onSearchChange, onStatusChange } = props;
+  const { onSearchChange, onStatusChange, onPriorityChange } = props;
   const [searchText, setSearchText] = useState("");
   const [radioValue, setRadioValue] = useState("All");
+  const [priorityValue, setPriorityValue] = useState([]);
 
   useEffect(() => {
     onSearchChange(searchText);
@@ -15,6 +16,10 @@ export default function Filters(props) {
   useEffect(() => {
     onStatusChange(radioValue);
   }, [radioValue]);
+
+  useEffect(() => {
+    onPriorityChange(priorityValue);
+  }, [priorityValue]);
 
   return (
     <Row justify="center">
@@ -52,6 +57,7 @@ export default function Filters(props) {
           Filter By Priority
         </Typography.Paragraph>
         <Select
+          onChange={(value) => setPriorityValue(value)}
           mode="multiple"
           allowClear
           placeholder="Please select"

@@ -5,10 +5,14 @@ import Filters from "./components/Filters";
 import TodoList from "./components/TodoList";
 import {
   addTodoAction,
+  priorityFilterChange,
   searchFilterChange,
   statusFilterChange,
 } from "./redux/actions/actions";
-import { filtersSelector, todoListRemainingSelector } from "./redux/selectors";
+import {
+  priorityFilterSelector,
+  todoListRemainingSelector,
+} from "./redux/selectors";
 
 const { Title } = Typography;
 
@@ -35,6 +39,10 @@ function App() {
     dispatch(statusFilterChange(status));
   };
 
+  const onPriorityChange = (priorityArr) => {
+    dispatch(priorityFilterChange(priorityArr));
+  };
+
   return (
     <div
       style={{
@@ -53,6 +61,7 @@ function App() {
       <Filters
         onSearchChange={onSearchChange}
         onStatusChange={onStatusChange}
+        onPriorityChange={onPriorityChange}
       />
       <Divider />
       <TodoList todoList={todoList} onAddTodo={onAddTodo} />
