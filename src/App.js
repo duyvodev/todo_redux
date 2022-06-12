@@ -17,7 +17,6 @@ const { Title } = Typography;
 function App() {
   const dispatch = useDispatch();
   const todoList = useSelector(todoListRemainingSelector);
-  console.log(todoList);
   const onAddTodo = (name, priority) => {
     dispatch(
       addTodoAction({
