@@ -3,16 +3,25 @@ import { useState } from "react";
 import Todo from "../Todo";
 
 export default function TodoList(props) {
-  const { todoList, onAddTodo } = props;
+  const { todoList, onAddTodo, onChangeTodoStatus } = props;
   const [todoName, setTodoName] = useState("");
   const [todoPriority, setTodoPriority] = useState("Medium");
+
+  const handleOnChangeStatus = (id) => {
+    if (onChangeTodoStatus) {
+      onChangeTodoStatus(id);
+    }
+  };
+
   return (
     <Row style={{ height: "calc(100% - 40px)" }}>
       <Col span={24} style={{ height: "calc(100% - 40px)", overflowY: "auto" }}>
         {todoList.map((item) => {
           return (
             <Todo
+              onChangeStatus={handleOnChangeStatus}
               key={item.id}
+              id={item.id}
               name={item.name}
               priority={item.priority}
               completed={item.completed}
