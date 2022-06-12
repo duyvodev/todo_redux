@@ -3,15 +3,16 @@ import "./App.css";
 import TodoList from "./components/TodoList";
 import Filters from "./components/Filters";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodoAction } from "./redux/actions/actions";
-import { todoListSelector } from "./redux/selectors";
+import { addTodoAction, searchFilterChange } from "./redux/actions/actions";
+import { searchFiltersSelector, todoListSelector } from "./redux/selectors";
 
 const { Title } = Typography;
 
 function App() {
   const dispatch = useDispatch();
   const todoList = useSelector(todoListSelector);
-  console.log(todoList);
+  const filters = useSelector(searchFiltersSelector);
+
   const onAddTodo = (name, priority) => {
     dispatch(
       addTodoAction({
@@ -22,6 +23,11 @@ function App() {
       })
     );
   };
+
+  const onSearchChange = (text) => {
+    dispatch(searchFilterChange(text));
+  };
+
   return (
     <div
       style={{
@@ -37,7 +43,7 @@ function App() {
       }}
     >
       <Title style={{ textAlign: "center" }}>TODO APP with REDUX</Title>
-      <Filters />
+      <Filters onSearchChange={onSearchChange} />
       <Divider />
       <TodoList todoList={todoList} onAddTodo={onAddTodo} />
     </div>

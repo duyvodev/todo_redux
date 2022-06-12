@@ -4,3 +4,10 @@ export const addTodoAction = (payload) => {
     payload,
   };
 };
+
+export const searchFilterChange = (payload) => {
+  return {
+    type: "filters/searchFilterChange",
+    payload,
+  };
+};
