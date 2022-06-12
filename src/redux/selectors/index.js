@@ -1,8 +1,8 @@
 import { createSelector } from "reselect";
 
-export const todoListSelector = (state) => state.todo.todoList;
+export const todoListSelector = (state) => state.todo;
 
-export const filtersSelector = (state) => state.todo.filters;
+export const filtersSelector = (state) => state.filters;
 
 // export const todoListRemainingSelector = (state) => {
 //   const todoList = todoListSelector(state);

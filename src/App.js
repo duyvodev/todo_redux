@@ -4,11 +4,7 @@ import "./App.css";
 import Filters from "./components/Filters";
 import TodoList from "./components/TodoList";
 import { addTodoAction, searchFilterChange } from "./redux/actions/actions";
-import {
-  filtersSelector,
-  todoListRemainingSelector,
-  todoListSelector,
-} from "./redux/selectors";
+import { filtersSelector, todoListRemainingSelector } from "./redux/selectors";
 
 const { Title } = Typography;
 
@@ -16,6 +12,9 @@ function App() {
   const dispatch = useDispatch();
   const todoList = useSelector(todoListRemainingSelector);
   const filters = useSelector(filtersSelector);
+
+  console.log(todoList);
+  console.log(filters);
 
   const onAddTodo = (name, priority) => {
     dispatch(
