@@ -1,23 +1,4 @@
-const initState = [
-  {
-    id: 1,
-    name: "Learn Redux",
-    priority: "Medium",
-    completed: false,
-  },
-  {
-    id: 2,
-    name: "Learn Java",
-    priority: "High",
-    completed: false,
-  },
-  {
-    id: 3,
-    name: "Learn C",
-    priority: "Low",
-    completed: true,
-  },
-];
+const initState = [];
 
 const todoListReducer = (state = initState, action) => {
   switch (action.type) {
