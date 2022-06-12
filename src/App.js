@@ -1,17 +1,21 @@
-import { Typography, Divider } from "antd";
-import "./App.css";
-import TodoList from "./components/TodoList";
-import Filters from "./components/Filters";
+import { Divider, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import Filters from "./components/Filters";
+import TodoList from "./components/TodoList";
 import { addTodoAction, searchFilterChange } from "./redux/actions/actions";
-import { searchFiltersSelector, todoListSelector } from "./redux/selectors";
+import {
+  filtersSelector,
+  todoListRemainingSelector,
+  todoListSelector,
+} from "./redux/selectors";
 
 const { Title } = Typography;
 
 function App() {
   const dispatch = useDispatch();
-  const todoList = useSelector(todoListSelector);
-  const filters = useSelector(searchFiltersSelector);
+  const todoList = useSelector(todoListRemainingSelector);
+  const filters = useSelector(filtersSelector);
 
   const onAddTodo = (name, priority) => {
     dispatch(

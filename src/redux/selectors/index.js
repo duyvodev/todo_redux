@@ -1,10 +1,24 @@
-export const todoListSelector = (state) => {
-  const todoList = state.todo.todoList;
-  const filters = state.todo.filters;
+import { createSelector } from "reselect";
 
-  return todoList.filter((todo) =>
-    todo.name.toLowerCase().includes(filters.search)
-  );
-};
+export const todoListSelector = (state) => state.todo.todoList;
 
-export const searchFiltersSelector = (state) => state.todo.filters;
+export const filtersSelector = (state) => state.todo.filters;
+
+// export const todoListRemainingSelector = (state) => {
+//   const todoList = todoListSelector(state);
+//   const filters = filtersSelector(state);
+
+//   return todoList.filter((todo) =>
+//     todo.name.toLowerCase().includes(filters.search)
+//   );
+// };
+
+export const todoListRemainingSelector = createSelector(
+  todoListSelector,
+  filtersSelector,
+  (todoList, filters) => {
+    return todoList.filter((todo) =>
+      todo.name.toLowerCase().includes(filters.search)
+    );
+  }
+);
