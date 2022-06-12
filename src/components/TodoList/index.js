@@ -48,6 +48,10 @@ export default function TodoList(props) {
           <Button
             type="primary"
             onClick={() => {
+              while (!todoName) {
+                return;
+              }
+
               onAddTodo(todoName, todoPriority);
               setTodoName("");
               setTodoPriority("Medium");
