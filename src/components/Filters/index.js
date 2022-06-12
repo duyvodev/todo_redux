@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 const { Search } = Input;
 
 export default function Filters(props) {
-  const { onSearchChange } = props;
+  const { onSearchChange, onStatusChange } = props;
   const [searchText, setSearchText] = useState("");
+  const [radioValue, setRadioValue] = useState("All");
 
   useEffect(() => {
     onSearchChange(searchText);
   }, [searchText]);
+
+  useEffect(() => {
+    onStatusChange(radioValue);
+  }, [radioValue]);
+
   return (
     <Row justify="center">
       <Col span={24}>
@@ -30,7 +36,10 @@ export default function Filters(props) {
         >
           Filter By Status
         </Typography.Paragraph>
-        <Radio.Group>
+        <Radio.Group
+          value={radioValue}
+          onChange={(e) => setRadioValue(e.target.value)}
+        >
           <Radio value="All">All</Radio>
           <Radio value="Completed">Completed</Radio>
           <Radio value="Todo">To do</Radio>
