@@ -28,11 +28,13 @@ export const todoListRemainingSelector = createSelector(
         );
       } else if (status === "Completed") {
         return todoList.filter(
-          (todo) => todo.name.toLowerCase().includes(search) && todo.completed
+          (todo) =>
+            todo.name.toLowerCase().includes(search) && todo.completed === true
         );
       } else {
         return todoList.filter(
-          (todo) => todo.name.toLowerCase().includes(search) && !todo.completed
+          (todo) =>
+            todo.name.toLowerCase().includes(search) && todo.completed === false
         );
       }
     } else {
@@ -46,14 +48,14 @@ export const todoListRemainingSelector = createSelector(
         return todoList.filter(
           (todo) =>
             todo.name.toLowerCase().includes(search) &&
-            todo.completed &&
+            todo.completed === true &&
             priorityArr.includes(todo.priority)
         );
       } else {
         return todoList.filter(
           (todo) =>
             todo.name.toLowerCase().includes(search) &&
-            !todo.completed &&
+            todo.completed === false &&
             priorityArr.includes(todo.priority)
         );
       }
