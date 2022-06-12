@@ -1,19 +1,23 @@
-const initState = [];
+import { createSlice } from "@reduxjs/toolkit";
 
-const todoListReducer = (state = initState, action) => {
-  switch (action.type) {
-    case "todoList/addTodo":
-      return [...state, action.payload];
-    case "todoList/changeTodoStatus": {
-      return state.map((todo) =>
-        todo.id === action.payload
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      );
-    }
-    default:
-      return state;
-  }
-};
+const initialState = [];
 
-export default todoListReducer;
+const todoListSlice = createSlice({
+  name: "todoList",
+  initialState,
+  reducers: {
+    addTodo: (state, action) => {
+      state.push(action.payload);
+    },
+    changeTodoStatus: (state, action) => {
+      state.forEach((todo) => {
+        if (todo.id === action.payload) {
+          todo.completed = !todo.completed;
+        }
+      });
+    },
+  },
+});
+
+export const { addTodo, changeTodoStatus } = todoListSlice.actions;
+export default todoListSlice.reducer;

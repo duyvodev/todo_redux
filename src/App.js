@@ -1,15 +1,14 @@
 import { Divider, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import Filters from "./components/Filters";
-import TodoList from "./components/TodoList";
+import Filters from "./components/Filters/index";
 import {
-  addTodoAction,
-  changeTodoStatus,
   priorityFilterChange,
   searchFilterChange,
   statusFilterChange,
-} from "./redux/actions/actions";
+} from "./components/Filters/filtersSlice";
+import TodoList from "./components/TodoList/index";
+import { addTodo, changeTodoStatus } from "./components/TodoList/todoListSlice";
 import { todoListRemainingSelector } from "./redux/selectors";
 
 const { Title } = Typography;
@@ -19,7 +18,7 @@ function App() {
   const todoList = useSelector(todoListRemainingSelector);
   const onAddTodo = (name, priority) => {
     dispatch(
-      addTodoAction({
+      addTodo({
         id: todoList.length + 1,
         name,
         priority,
