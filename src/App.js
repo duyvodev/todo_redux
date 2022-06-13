@@ -1,34 +1,66 @@
 import { Divider, Typography } from "antd";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import Filters from "./components/Filters/index";
 import {
   priorityFilterChange,
   searchFilterChange,
   statusFilterChange,
 } from "./components/Filters/filtersSlice";
+import Filters from "./components/Filters/index";
 import TodoList from "./components/TodoList/index";
-import { addTodo, changeTodoStatus } from "./components/TodoList/todoListSlice";
+import {
+  addNewTodo,
+  addTodo,
+  changeTodoStatus,
+  fetchTodos,
+  updateTodo,
+} from "./components/TodoList/todoListSlice";
+import { setupServer } from "./fakeApis";
 import { todoListRemainingSelector } from "./redux/selectors";
 
 const { Title } = Typography;
 
+if (process.env.NODE_ENV === "development") {
+  setupServer();
+}
+
 function App() {
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, []);
+
   const dispatch = useDispatch();
   const todoList = useSelector(todoListRemainingSelector);
   const onAddTodo = (name, priority) => {
     dispatch(
-      addTodo({
+      // addTodo({
+      //   id: todoList.length + 1,
+      //   name,
+      //   priority,
+      //   completed: false,
+      // })
+
+      addNewTodo({
         id: todoList.length + 1,
         name,
         priority,
         completed: false,
       })
     );
+    // dispatch(
+    //   addTodos({
+    //     id: todoList.length + 1,
+    //     name,
+    //     priority,
+    //     completed: false,
+    //   })
+    // );
   };
 
   const onChangeTodoStatus = (id) => {
-    dispatch(changeTodoStatus(id));
+    // dispatch(changeTodoStatus(id));
+    dispatch(updateTodo(id));
   };
 
   const onSearchChange = (text) => {
